@@ -11,6 +11,8 @@
 
 @implementation AppController : CPObject
 {
+    CPView          _blueView;
+    TNGrowlCenter   _blueGrowl;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -25,8 +27,6 @@
     [label setFrameOrigin:CPPointMake(10, 10)];
     [label sizeToFit];
     [contentView addSubview:label];
-    
-    
     
     var button = [CPButton buttonWithTitle:@"Show Info"];
     [button setFrameOrigin:CPPointMake(10, 50)];
@@ -64,6 +64,20 @@
     [button setAction:@selector(showGrowlInteractive:)];
     [contentView addSubview:button];
     
+    
+    _blueView = [[CPView alloc] initWithFrame:CPRectMake(10, 230, 270, 400)];
+    [_blueView setBackgroundColor:[CPColor colorWithHexString:@"C8CDDA"]];
+    [contentView addSubview:_blueView];
+    
+    var _blueGrowl = [[TNGrowlCenter alloc] init];
+    [_blueGrowl setView:_blueView];
+    
+    button = [CPButton buttonWithTitle:@"Show in blue"];
+    [button setFrameOrigin:CPPointMake(10, 200)];
+    [button setFrameSize:CPSizeMake(100, 24)];
+    [button setTarget:self];
+    [button setAction:@selector(showGrowlInBlueView:)];
+    [contentView addSubview:button];
     
     var growl = [TNGrowlCenter defaultCenter];
 	[growl setView:contentView];
@@ -106,8 +120,14 @@
 }
 
 
--(IBAction)didGrowlClick:(id)sender
+- (IBAction)didGrowlClick:(id)sender
 {
     alert("hihi, it tickles!")
+}
+
+
+- (IBAction)showGrowlInBlueView:(id)sender
+{
+    [_blueGrowl pushNotificationWithTitle:@"Hello" message:@"Hello World!" icon:TNGrowlIconInfo];
 }
 @end
