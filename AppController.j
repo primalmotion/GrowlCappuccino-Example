@@ -22,7 +22,7 @@
 
     var label = [[CPTextField alloc] initWithFrame:CGRectMakeZero()];
 
-    [label setStringValue:@"Hello World!"];
+    [label setStringValue:@"GrowlCappuccino Demonstration"];
     [label setFont:[CPFont boldSystemFontOfSize:24.0]];
     [label setFrameOrigin:CPPointMake(10, 10)];
     [label sizeToFit];
